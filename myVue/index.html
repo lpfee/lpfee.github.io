@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta charset="utf-8">
+    <title>myVue</title>
+    <link href="css/panna_com.css" type="text/css" rel="stylesheet"/>
+    <link href="css/index.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/vue.js"></script>
+</head>
+<body>
+    
+    
+    <!-- <div id="app">
+        <ul>
+            <li v-for="ques in questions">
+                <span>{{ ques.dataid }}.</span>
+                <span>{{ ques.title }}</span>
+                <div v-for="ans in ques.answer">
+                    {{ ans }}
+                </div>
+            </li>
+        </ul>
+    </div> -->
+
+    <div id="app">
+        <input v-model="newTodo" v-on:keyup.enter="addTodo">
+        <ul>
+            <li v-for="todo in todos">
+                <span>{{ todo.text }}</span>
+                <button v-on:click="removeTodo($index)">X</button>
+            </li>
+        </ul>
+    </div>
+
+
+
+
+    
+    <script type="text/javascript">
+        window.onload = function () {
+            new Vue({
+                el: '#app',
+                data: {
+                    newTodo: '',
+                    todos: [
+                        { text: 'add some todos' }
+                    ]
+                },
+                methods: {
+                    addTodo: function() {
+                        var text = this.newTodo.trim();
+                        if(text) {
+                            this.todos.push({ text: text });
+                            this.newTodo = '';
+                        }
+                    },
+                    removeTodo: function(index) {
+                        this.todos.splice(index,1);
+                    }
+                }
+            })
+
+
+            // new Vue({
+            //     el: '#app',
+            //     data: {
+            //         questions: [
+            //             {
+            //                 dataid:1,
+            //                 title:"南国中心区域交通发达，所处地铁线包括？",
+            //                 answer:["轨道1、2号线","轨道1、4号线","轨道3、2号线","轨道2、4号线"]
+            //             },
+            //             {
+            //                 dataid:2,
+            //                 title:"南国中心体量为多少万方？",
+            //                 answer:["60万方","100万方","40万方","20万方"]
+            //             },
+            //             {
+            //                 dataid:3,
+            //                 title:"南国中心首创的商业价值是？",
+            //                 answer:["国际甲级写字楼","星级酒店","国际潮流购物中心","4个“首层”"]
+            //             }
+            //         ]
+            //     }
+            // })
+            
+        }
+
+    </script>
+</body>
+</html>
